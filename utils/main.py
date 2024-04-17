@@ -23,9 +23,9 @@ app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 
-@app.get("/news")
+@app.get("/latset")
 @limiter.limit("250/minute")
-async def VLR_news():
+async def VLR_get_latest():
     return vlr.get_latest_data()
 
 
