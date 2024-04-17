@@ -9,8 +9,8 @@ from slowapi.util import get_remote_address
 limiter = Limiter(key_func=get_remote_address)
 
 app = FastAPI(
-    title="vlrggapi",
-    description="An Unofficial REST API for [vlr.gg](https://www.vlr.gg/), a site for Valorant Esports match and news "
+    title="VLRScraper",
+    description="An Unofficial API for [vlr.gg](https://www.vlr.gg/), a site for Valorant Esports match and news "
     "coverage. ",
     docs_url="/",
     redoc_url=None,
@@ -25,13 +25,9 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 @app.get("/news")
 @limiter.limit("250/minute")
-async def VLR_news(request: Request):
-    return vlr.vlr_recent()
+async def VLR_news():
+    return vlr.get_latest_data()
 
-
-@app.get("/health")
-def health():
-    return "Healthy: OK"
 
 
 if __name__ == "__main__":
