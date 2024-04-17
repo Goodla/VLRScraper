@@ -2,6 +2,12 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import csv
+from datetime import timezone
+from datetime import datetime
+from selectolax.parser import HTMLParser
+
+import utils.utils as res
+from utils.utils import headers
 
 class Vlr:
     @staticmethod
